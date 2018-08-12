@@ -6,16 +6,16 @@ from tensorflow.python.tools import freeze_graph
 from tensorflow.tools import graph_transforms
 
 tf.flags.DEFINE_string(
-    'savedmodel_dir', '',  # tmp/models/inception_v3
+    'savedmodel_dir', '',
     'The directory where the saved model was written to.')
 tf.flags.DEFINE_string(
-    'frozen_graph_path', 'tmp/models/pnasnet-5_large/frozen_graph.pb',
+    'frozen_graph_path', '',
     'The path where the frozen graph was written to.')
 tf.flags.DEFINE_string(
-    'input_names', 'input',
+    'input_names', '',
     'Input node names, comma separated.')
 tf.flags.DEFINE_string(
-    'output_names', 'ToInt64, TopKV2',
+    'output_names', '',
     'Output node names, comma separated.')
 
 FLAGS = tf.flags.FLAGS
@@ -48,7 +48,7 @@ def main(_):
 
         output_graph_def = freeze_graph.freeze_graph(
             input_graph=None, input_saver=None, input_checkpoint=None, input_binary=True,
-            clear_devices=True, output_node_names=FLAGS.output_names,
+            clear_devices=True, output_node_names=', '.join(output_names),
             restore_op_name=None, filename_tensor_name=None, output_graph=frozen_graph_path,
             initializer_nodes=None, input_saved_model_dir=FLAGS.savedmodel_dir)
         optimized_graph_path = FLAGS.savedmodel_dir

@@ -14,7 +14,7 @@ MODEL_DIR=../tmp/models/inception_v3
 GRAPH_DIR=../tmp/models/inception_v3/frozen_graph.pb
 
 # Where the optimized frozen graph will be saved to.
-OPTIMIZED_GRAPH_DIR=../tmp/model/inception_v3/optimized_graph.pb
+OPTIMIZED_GRAPH_DIR=../tmp/models/inception_v3/optimized_graph.pb
 
 # Optimize the model
 python ../src/optimize.py \

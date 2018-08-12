@@ -7,16 +7,16 @@ tf.flags.DEFINE_string(
     'graph_path', '',
     'The path where the original graph was written to.')
 tf.flags.DEFINE_string(
-    'optimized_graph_path', 'tmp/models/pnasnet-5_large/optimized_graph.pb',
+    'optimized_graph_path', '',
     'The path where the optimized graph was written to.')
 tf.flags.DEFINE_string(
-    'input_nodes', 'input:0',
+    'input_nodes', '',
     'Input node names, comma separated.')
 tf.flags.DEFINE_string(
-    'output_nodes', ' ToInt64:0, TopKV2:0',
+    'output_nodes', '',
     'Output node names, comma separated.')
 tf.flags.DEFINE_string(
-    'dataset_dir', 'tmp/datasets/imagenet',
+    'dataset_dir', '',
     'The directory where the dataset files are stored.')
 tf.flags.DEFINE_integer(
     'batch_size', '32',
@@ -112,7 +112,7 @@ def main(_):
 
     if not (FLAGS.graph_path and FLAGS.optimized_graph_path):
         raise AttributeError('Both path to the frozen graph and path to the optimized frozen graph must be provided!')
-    if not (FLAGS.input_names and FLAGS.output_names):
+    if not (FLAGS.input_nodes and FLAGS.output_nodes):
         raise AttributeError('Input and output tensor names must be provided along with frozen graph path!')
     if not FLAGS.dataset_dir:
         raise AttributeError('Path to the directory where the eval dataset files are stored must be provided!')
